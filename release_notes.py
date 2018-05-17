@@ -520,7 +520,6 @@ def createContentDescriptor(version, assetId, res):
         json.dump(contentDescriptor, outfile)
 
     with open('release-notes.txt', 'w') as outfile:
-        print release_notes
         outfile.write(release_notes)
 
 
