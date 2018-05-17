@@ -640,4 +640,4 @@ script:
       required: true
       description: <string> The identifier of the vulnerability.
     description: Returns the details for solutions that can remediate a given vulnerability.
-releaseNotes: "-"
+releaseNotes: '-'
