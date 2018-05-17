@@ -3,7 +3,7 @@ commonfields:
   version: -1
 name: Rapid7 Nexpose
 display: Rapid7 Nexpose
-category: Authentication
+category: Vulnerability Management
 image: data:image/png;base64,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
 description: Rapid7’s on-premise vulnerability management solution, Nexpose, helps
   you reduce your threat exposure by enabling you to assess and respond to changes
@@ -47,7 +47,7 @@ script:
                     'Content-Type': ['application/json'],
                 };
         if(TOKEN){
-            headers['Token'] = TOKEN;
+            headers['Token'] = [TOKEN];
         }
 
         return headers;
@@ -160,7 +160,7 @@ script:
 
         var hrAsset = {
             Addresses: dq(asset.addresses, 'ip'),
-            Hardware: asset.mac, // ?
+            Hardware: dq(asset.addresses, 'mac'), // ?
             Aliases: dq(asset.hostNames, 'name'),
             HostType: asset.type,
             Site: '',
@@ -209,10 +209,13 @@ script:
         }
 
         var hrVulnerabilities = [];
-        var contextVulnerabilities = [];
+        var asset = {
+            id: assetId,
+            Vulnerability: []
+        };
         vulnerabilities.forEach(function(v){
             var vulnerability = getVulnerability(v.id);
-            contextVulnerabilities.push(vulnerability);
+            asset.Vulnerability.push(vulnerability);
             var hrVulnerability = {
                 Title: vulnerability.title,
                 Malware: vulnerability.malwareKits,
@@ -237,7 +240,7 @@ script:
         entry.ReadableContentsFormat = formats.markdown;
         entry.HumanReadable = tableToMarkdown('Asset ' + assetId + ' Vulnerabilities' , hrVulnerabilities);
         entry.EntryContext = {
-            'Nexpose.Asset.Vulnerability(val.id==obj.id)': contextVulnerabilities
+            'Nexpose.Asset(val.id==obj.id)': asset
         }
 
         return entry;
@@ -263,9 +266,13 @@ script:
         if(!software || software.length === 0){
             return "No software found";
         }
-
+        var asset = {
+            id: assetId,
+            Software: []
+        }
         var hrSoftware = [];
         software.forEach(function(s){
+            asset.Software.push(s);
            var hrs = {
                Software: s.description,
                version: s.version
@@ -281,7 +288,7 @@ script:
         entry.ReadableContentsFormat = formats.markdown;
         entry.HumanReadable = tableToMarkdown('Asset ' + assetId + ' Installed software' , hrSoftware);
         entry.EntryContext = {
-            'Nexpose.Software(val.id==obj.id)': software
+            'Nexpose.Asset(val.id==obj.id)': asset
         }
 
         return entry;
@@ -302,12 +309,16 @@ script:
             return "No services found";
         }
 
+        var asset = {
+            id: assetId,
+            Service: []
+        }
+
         var hrServices = [];
-        var contextServices = [];
         services.forEach(function(s){
             if(s.protocol && s.port){
                 var service = getService(assetId, s.protocol, s.port);
-                contextServices.push(service);
+                asset.Service.push(service);
                 var vulnerabilities = getServiceVulnerabilities(assetId, s.protocol, s.port);
                 var hrService = {
                     ServiceName: service.name,
@@ -330,7 +341,7 @@ script:
         entry.ReadableContentsFormat = formats.markdown;
         entry.HumanReadable = tableToMarkdown('Asset ' + assetId + ' Services' , hrServices);
         entry.EntryContext = {
-            'Nexpose.Service(val.product + port==obj.product + port)': contextServices
+            'Nexpose.Asset(val.id==obj.id)': asset
         }
 
         return entry;
@@ -365,7 +376,6 @@ script:
         }
 
         var groups = getUserGroups(userId);
-        log(Object.keys(groups));
         var sites = getUserSites(userId);
 
         var hrUser = {
@@ -465,28 +475,26 @@ script:
     function getAssetVulnerabilitySolutionsCommand(){
         var assetId = args.id;
         var vulnerabilityId = args.vulnerabilityId;
-        // why asset?
         delete(args.assetId);
         delete(args.vulnerabilityId);
 
-        var solutions = getVulnerabilitySolutions(vulnerabilityId);
+        var solutions = getVulnerabilitySolutions(assetId, vulnerabilityId);
 
         if(!solutions || solutions.length === 0){
             return "No solutions found";
         }
 
-        if(!(solutions instanceof Array)){
-            solutions = [solutions];
+        var vulnerability = {
+            id: vulnerabilityId,
+            Solution: []
         }
-
-        var contextSolutions = [];
         var hrSolutions = [];
 
-        solutions.forEach(function(s){
-            var solution = getSolution(s);
-            contextSolutions.push(solution);
+        solutions.forEach(function(solution){
+            //var solution = getSolution(s);
+            vulnerability.Solution.push(solution);
             var hrSolution = {
-                AdditionalInformation: s.additionalInformation,
+                AdditionalInformation: solution.additionalInformation,
                 Estimate: solution.estimate,
                 Steps: dq(solution.steps, 'text'),
                 Summary: dq(solution.summary, 'text'),
@@ -498,20 +506,20 @@ script:
 
         var entry = {
             Type: entryTypes.note,
-            Contents: contextSolutions,
+            Contents: solutions,
             ContentsFormat: formats.json
         };
         entry.ReadableContentsFormat = formats.markdown;
         entry.HumanReadable = tableToMarkdown('Solutions for vulnerability ' + vulnerabilityId, hrSolutions);
         entry.EntryContext = {
-            'Nexpose.Asset.Vulnerability.Solution(val.id==obj.id)': contextSolutions
+            'Nexpose.Asset.Vulnerability(val.id==obj.id)': vulnerability
         }
 
         return entry;
     }
 
-    function getVulnerabilitySolutions(vulnerabilityId){
-        var path = 'vulnerabilities/' + vulnerabilityId + '/solutions';
+    function getVulnerabilitySolutions(assetId, vulnerabilityId){
+        var path = 'assets/' + assetId + '/vulnerabilities/' + vulnerabilityId + '/solution';
 
         return getListResponse(path);
     }
@@ -632,5 +640,4 @@ script:
       required: true
       description: <string> The identifier of the vulnerability.
     description: Returns the details for solutions that can remediate a given vulnerability.
-  runonce: false
 releaseNotes: "-"
